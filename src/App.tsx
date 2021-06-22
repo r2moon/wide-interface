@@ -1,26 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { createWeb3ReactRoot, Web3ReactProvider } from "@web3-react/core";
+import { ThemeContextProvider } from "providers/ThemeContext";
+import { Header, Container } from "components";
+import Privacy from "pages/Privacy";
+import { NetworkContextName } from "constants/misc";
+import getLibrary from "utils/getLibrary";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const Web3ProviderNetwork = createWeb3ReactRoot(NetworkContextName);
+
+const App: React.FC = () => (
+  <Web3ReactProvider getLibrary={getLibrary}>
+    <Web3ProviderNetwork getLibrary={getLibrary}>
+      <ThemeContextProvider>
+        <Container>
+          <Header />
+          <Router>
+            <Switch>
+              <Route path="/" exact>
+                <Privacy />
+              </Route>
+            </Switch>
+          </Router>
+        </Container>
+      </ThemeContextProvider>
+    </Web3ProviderNetwork>
+  </Web3ReactProvider>
+);
 
 export default App;
