@@ -1,7 +1,8 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { FlexContainer, Button } from "components";
+import { FlexContainer, Button, RoundRow } from "components";
 import Deposit from "./components/Deposit";
+import Statistics from "./components/Statistics";
 
 const PrivacyDiv = styled.div`
   width: 100%;
@@ -15,6 +16,14 @@ const PrivacyDiv = styled.div`
   border-radius: 50px;
 `;
 
+const StatisticsContainer = styled.div`
+  width: 100%;
+  background: ${({ theme }) => theme.colors.background2};
+  border: 2px solid;
+  border-color: ${({ theme }) => theme.colors.primary};
+  border-radius: 50px;
+`;
+
 const PrivacyTransfer = () => {
   const [deposit, setDeposit] = useState<boolean>(true);
 
@@ -22,13 +31,18 @@ const PrivacyTransfer = () => {
     <FlexContainer
       alignItems="center"
       justifyContent="center"
-      direction="column"
+      direction="row"
       width="100%"
       height="100%"
       padding="100px 0"
       maxWidth="1200px"
     >
-      <FlexContainer alignItems="center" direction="column" width="50%">
+      <FlexContainer
+        alignItems="center"
+        direction="column"
+        width="50%"
+        margin="0 20px 0 0"
+      >
         <FlexContainer
           alignItems="center"
           justifyContent="space-between"
@@ -56,6 +70,36 @@ const PrivacyTransfer = () => {
         <PrivacyDiv>
           <Deposit />
         </PrivacyDiv>
+      </FlexContainer>
+
+      <FlexContainer
+        alignItems="center"
+        direction="column"
+        width="50%"
+        margin="0 0 0 20px"
+      >
+        <FlexContainer
+          alignItems="center"
+          justifyContent="space-between"
+          direction="row"
+          width="100%"
+          margin="0 0 12px 0"
+        >
+          <RoundRow margin="0 30px 0 0" padding="0 60px">
+            STATISTICS{" "}
+            <RoundRow
+              variant="primary"
+              margin="0 0 0 20px"
+              padding="0 16px"
+              height={32}
+            >
+              0.1 ETH
+            </RoundRow>
+          </RoundRow>
+        </FlexContainer>
+        <StatisticsContainer>
+          <Statistics />
+        </StatisticsContainer>
       </FlexContainer>
     </FlexContainer>
   );

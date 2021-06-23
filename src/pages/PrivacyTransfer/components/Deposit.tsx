@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import {
   FlexContainer,
@@ -13,7 +13,7 @@ const StyledLabel = styled.div`
   margin-bottom: 7px;
 `;
 
-const StyledTokenSelector = styled.div`
+const StyledGroup = styled.div`
   width: 100%;
   margin-bottom: 20px;
 `;
@@ -30,7 +30,7 @@ const Deposit = () => {
       alignItems="flex-start"
       margin="45px 65px"
     >
-      <StyledTokenSelector>
+      <StyledGroup>
         <StyledLabel>Token</StyledLabel>
         <DropDown
           options={tokens}
@@ -38,15 +38,15 @@ const Deposit = () => {
           selected={tokenSelected}
           onChange={setTokenSelected}
         />
-      </StyledTokenSelector>
-      <StyledTokenSelector>
+      </StyledGroup>
+      <StyledGroup>
         <StyledLabel>Amount</StyledLabel>
         <RadioSelector
           options={amounts}
           selected={amountSelected}
           onChange={setAmountSelected}
         />
-      </StyledTokenSelector>
+      </StyledGroup>
       <ConnectButton width="100%" />
     </FlexContainer>
   );
