@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { createWeb3ReactRoot, Web3ReactProvider } from "@web3-react/core";
 import { ThemeContextProvider } from "providers/ThemeContext";
 import { Header, Container } from "components";
-import Privacy from "pages/Privacy";
+import PrivacyTransfer from "pages/PrivacyTransfer";
 import { NetworkContextName } from "constants/misc";
 import getLibrary from "utils/getLibrary";
 
@@ -14,11 +14,11 @@ const App: React.FC = () => (
     <Web3ProviderNetwork getLibrary={getLibrary}>
       <ThemeContextProvider>
         <Container>
-          <Header />
           <Router>
+            <Header />
             <Switch>
               <Route path="/" exact>
-                <Privacy />
+                <PrivacyTransfer />
               </Route>
             </Switch>
           </Router>

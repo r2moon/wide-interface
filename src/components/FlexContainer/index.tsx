@@ -50,6 +50,8 @@ type FlexContainerProps = {
   height?: string;
   padding?: string;
   margin?: string;
+  maxWidth?: string;
+  maxHeight?: string;
 };
 
 const FlexContainer = styled.div<FlexContainerProps>`
@@ -62,6 +64,8 @@ const FlexContainer = styled.div<FlexContainerProps>`
   position: ${({ position }) => position};
   width: ${({ width }) => width};
   height: ${({ height }) => height};
+  max-width: ${({ maxWidth }) => maxWidth};
+  max-height: ${({ maxHeight }) => maxHeight};
   padding: ${({ padding }) => padding};
   margin: ${({ margin }) => margin};
 `;

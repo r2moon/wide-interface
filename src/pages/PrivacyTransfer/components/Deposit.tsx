@@ -1,6 +1,11 @@
 import { useState, useCallback } from "react";
 import styled from "styled-components";
-import { FlexContainer, DropDown, RadioSelector, Button } from "components";
+import {
+  FlexContainer,
+  DropDown,
+  RadioSelector,
+  ConnectButton,
+} from "components";
 
 const StyledLabel = styled.div`
   color: ${({ theme }) => theme.colors.text2};
@@ -42,7 +47,7 @@ const Deposit = () => {
           onChange={setAmountSelected}
         />
       </StyledTokenSelector>
-      <Button variant="primary">CONNECT</Button>
+      <ConnectButton width="100%" />
     </FlexContainer>
   );
 };
