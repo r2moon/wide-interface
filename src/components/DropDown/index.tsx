@@ -1,7 +1,23 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import styled from "styled-components";
-import { FlexContainer } from "components";
 import { useFocusTracker } from "hook";
+
+type StyledDropDownBoxProps = {
+  opened?: boolean;
+};
+
+const StyledDropDownBox = styled.div<StyledDropDownBoxProps>`
+  width: 100%;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  border: 2px solid;
+  background-color: white;
+  border-color: ${({ theme }) => theme.colors.primary};
+  border-radius: ${({ opened }) => (opened ? "22px 22px 0 0" : "22px")};
+  position: relative;
+  cursor: pointer;
+`;
 
 const StyledDropDownList = styled.div`
   width: 100%;
@@ -9,8 +25,9 @@ const StyledDropDownList = styled.div`
   margin: 0;
   overflow-y: auto;
   background: white;
-  border: 2px solid black;
-  border-radius: 0;
+  border: 2px solid;
+  border-color: ${({ theme }) => theme.colors.primary};
+  border-radius: 0 0 22px 22px;
   transform-origin: top;
   animation: openDropdown 0.15s ease-in;
   position: absolute;
@@ -20,17 +37,17 @@ const StyledDropDownList = styled.div`
 
   @keyframes openDropdown {
     0% {
-      transform: scale(0.7);
+      transform: scale(1, 0.2);
       opacity: 0;
     }
 
     50% {
-      transform: scale(1.1);
+      transform: scale(1, 0.6);
       opacity: 1;
     }
 
     100% {
-      transform: scale(1);
+      transform: scale(1, 1);
     }
   }
 
@@ -55,6 +72,9 @@ const StyledDropDownList = styled.div`
 `;
 
 const StyledDropDownOption = styled.div`
+  display: flex;
+  align-items: center;
+  height: 30px;
   padding: 5px;
   color: black;
   font-weight: 400;
@@ -98,13 +118,7 @@ const DropDown = ({
   const focused = useFocusTracker(selectEl, true);
 
   return (
-    <FlexContainer
-      ref={selectEl}
-      alignItems="center"
-      border="1px solid black"
-      position="relative"
-      width="100%"
-    >
+    <StyledDropDownBox ref={selectEl} opened={focused}>
       <StyledTytle>
         {selected !== undefined ? options[selected] : placeholder}
       </StyledTytle>
@@ -112,12 +126,12 @@ const DropDown = ({
         <StyledDropDownList>
           {options.map((option, i) => (
             <StyledDropDownOption onClick={() => onChange(i)}>
-              {option}
+              <div>{option}</div>
             </StyledDropDownOption>
           ))}
         </StyledDropDownList>
       )}
-    </FlexContainer>
+    </StyledDropDownBox>
   );
 };
 

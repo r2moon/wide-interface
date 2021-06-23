@@ -1,31 +1,59 @@
 import { useState, useCallback } from "react";
 import styled from "styled-components";
-import { FlexContainer } from "components";
+import { FlexContainer, Button } from "components";
 import Deposit from "./components/Deposit";
 
 const PrivacyDiv = styled.div`
-  position: relative;
-  max-width: 480px;
   width: 100%;
-  background: rgb(255, 255, 255);
-  box-shadow: rgb(0 0 0 / 1%) 0px 0px 1px, rgb(0 0 0 / 4%) 0px 4px 8px,
-    rgb(0 0 0 / 4%) 0px 16px 24px, rgb(0 0 0 / 1%) 0px 24px 32px;
-  border-radius: 24px;
-  padding: 20px;
+  background: radial-gradient(
+    175.86% 187.97% at 149.12% -81.03%,
+    #1400ff 0%,
+    #f2f2f2 100%
+  );
+  border: 2px solid;
+  border-color: ${({ theme }) => theme.colors.border};
+  border-radius: 50px;
 `;
 
-const Privacy = () => (
-  <FlexContainer
-    alignItems="center"
-    justifyContent="center"
-    width="100%"
-    height="100%"
-    padding="200px 0"
-  >
-    <PrivacyDiv>
-      <Deposit />
-    </PrivacyDiv>
-  </FlexContainer>
-);
+const Privacy = () => {
+  const [deposit, setDeposit] = useState<boolean>(true);
+
+  return (
+    <FlexContainer
+      alignItems="center"
+      justifyContent="center"
+      direction="column"
+      width="100%"
+      height="100%"
+      padding="100px 0"
+    >
+      <FlexContainer alignItems="center" direction="column">
+        <FlexContainer
+          alignItems="center"
+          justifyContent="space-between"
+          direction="row"
+          width="100%"
+          margin="0 0 12px 0"
+        >
+          <Button
+            variant={deposit ? "primary" : "secondary"}
+            onClick={() => setDeposit(true)}
+          >
+            DEPOSIT
+          </Button>
+          <Button
+            variant={!deposit ? "primary" : "secondary"}
+            onClick={() => setDeposit(false)}
+          >
+            WITHDRAW
+          </Button>
+        </FlexContainer>
+        <PrivacyDiv>
+          <Deposit />
+        </PrivacyDiv>
+      </FlexContainer>
+    </FlexContainer>
+  );
+};
 
 export default Privacy;
