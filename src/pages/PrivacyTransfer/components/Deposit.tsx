@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
+import { UnsupportedChainIdError, useWeb3React } from "@web3-react/core";
 import styled from "styled-components";
 import {
   FlexContainer,
   DropDown,
   RadioSelector,
   ConnectButton,
+  Button,
 } from "components";
+import PrivacyNotesModal from "./PrivacyNotesModal";
 
 const StyledLabel = styled.div`
   color: ${({ theme }) => theme.colors.text2};
@@ -19,10 +22,18 @@ const StyledGroup = styled.div`
 `;
 
 const Deposit = () => {
+  const { active, account } = useWeb3React();
+
   const [tokenSelected, setTokenSelected] = useState<number>(0);
   const [amountSelected, setAmountSelected] = useState<number>(0);
   const tokens = ["ETH", "DAI", "USDC"];
   const amounts = ["0.1 ETH", "1 ETH", "10 ETH", "100 ETH"];
+
+  const [privacyNotesOpend, setPrivacyNotesOpend] = useState<boolean>(false);
+
+  const deposit = useCallback(() => {
+    setPrivacyNotesOpend(true);
+  }, []);
 
   return (
     <FlexContainer
@@ -47,7 +58,16 @@ const Deposit = () => {
           onChange={setAmountSelected}
         />
       </StyledGroup>
-      <ConnectButton width="100%" />
+      {(!account || !active) && <ConnectButton width="100%" />}
+      {account && active && (
+        <Button variant="primary" width="100%" onClick={deposit}>
+          DEPOSIT
+        </Button>
+      )}
+      <PrivacyNotesModal
+        isOpen={privacyNotesOpend}
+        onDismiss={() => setPrivacyNotesOpend(false)}
+      />
     </FlexContainer>
   );
 };

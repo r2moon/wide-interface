@@ -36,10 +36,9 @@ const StyledDialogContent = styled(
   overflow-y: ${({ mobile }) => (mobile ? "scroll" : "hidden")};
 
   &[data-reach-dialog-content] {
-    margin: 0 0 2rem 0;
     background-color: #fff;
-    border: 1px solid #f7f8fa;
-    box-shadow: 0 4px 8px 0 ${transparentize(0.95, "#2F80ED")};
+    border: 2px solid;
+    border-color: ${({ theme }) => theme.colors.primary};
     padding: 0px;
     width: 50vw;
     overflow-y: ${({ mobile }) => (mobile ? "scroll" : "hidden")};

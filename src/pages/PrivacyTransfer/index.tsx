@@ -80,12 +80,12 @@ const PrivacyTransfer = () => {
       >
         <FlexContainer
           alignItems="center"
-          justifyContent="space-between"
+          justifyContent="flex-end"
           direction="row"
           width="100%"
           margin="0 0 12px 0"
         >
-          <RoundRow margin="0 30px 0 0" padding="0 60px">
+          <RoundRow padding="0 60px">
             STATISTICS{" "}
             <RoundRow
               variant="primary"

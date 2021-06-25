@@ -3,7 +3,6 @@ import { InjectedConnector } from "@web3-react/injected-connector";
 import getLibrary from "../utils/getLibrary";
 
 import { NetworkConnector } from "./NetworkConnector";
-import UNISWAP_LOGO_URL from "../logo.svg";
 
 const INFURA_KEY = process.env.REACT_APP_INFURA_KEY;
 
@@ -16,14 +15,11 @@ if (typeof INFURA_KEY === "undefined") {
 const NETWORK_URLS: {
   [chainId: number]: string;
 } = {
-  1: `https://mainnet.infura.io/v3/${INFURA_KEY}`,
-  4: `https://rinkeby.infura.io/v3/${INFURA_KEY}`,
-  3: `https://ropsten.infura.io/v3/${INFURA_KEY}`,
-  5: `https://goerli.infura.io/v3/${INFURA_KEY}`,
-  42: `https://kovan.infura.io/v3/${INFURA_KEY}`,
+  137: "https://rpc-mainnet.matic.network",
+  80001: "https://rpc-mumbai.matic.today",
 };
 
-const SUPPORTED_CHAIN_IDS = [1, 4, 3, 42, 5];
+const SUPPORTED_CHAIN_IDS = [137, 80001];
 
 export const network = new NetworkConnector({
   urls: NETWORK_URLS,

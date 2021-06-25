@@ -4,7 +4,7 @@ import { isMobile } from "react-device-detect";
 import { UnsupportedChainIdError, useWeb3React } from "@web3-react/core";
 import { AbstractConnector } from "@web3-react/abstract-connector";
 import { WalletConnectConnector } from "@web3-react/walletconnect-connector";
-import { Modal } from "components";
+import { Button, FlexContainer, Modal } from "components";
 import { injected } from "connectors";
 import { SUPPORTED_WALLETS } from "constants/wallet";
 import MetamaskIcon from "assets/images/metamask.png";
@@ -14,7 +14,7 @@ const UpperSection = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin: 20px;
+  margin: 32px 24px 30px;
 
   h5 {
     margin: 0;
@@ -33,10 +33,9 @@ const UpperSection = styled.div`
   }
 `;
 
-const HeaderRow = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+const HeaderTitle = styled.span`
+  color: ${({ theme }) => theme.colors.primary};
+  font-size: 24px;
 `;
 
 type Props = {
@@ -116,7 +115,7 @@ const ConnectWalletModal = ({ isOpen, onDismiss }: Props) => {
               id={`connect-${key}`}
               key={key}
               active={option.connector && option.connector === connector}
-              color={option.color}
+              color="33"
               link={option.href}
               header={option.name}
               subheader={null}
@@ -157,11 +156,32 @@ const ConnectWalletModal = ({ isOpen, onDismiss }: Props) => {
       }
 
       // return rest of options
+      // return (
+      //   !isMobile &&
+      //   !option.mobileOnly && (
+      //     <Option
+      //       id={`connect-${key}`}
+      //       onClick={() => {
+      //         if (option.connector === connector) {
+      //           setWalletView(WALLET_VIEWS.ACCOUNT);
+      //         } else if (!option.href) {
+      //           tryActivation(option.connector);
+      //         }
+      //       }}
+      //       key={key}
+      //       active={option.connector === connector}
+      //       color={option.color}
+      //       link={option.href}
+      //       header={option.name}
+      //       subheader={null} // use option.descriptio to bring back multi-line
+      //       icon={option.iconURL}
+      //     />
+      //   )
+      // );
       return (
         !isMobile &&
         !option.mobileOnly && (
-          <Option
-            id={`connect-${key}`}
+          <Button
             onClick={() => {
               if (option.connector === connector) {
                 setWalletView(WALLET_VIEWS.ACCOUNT);
@@ -170,11 +190,8 @@ const ConnectWalletModal = ({ isOpen, onDismiss }: Props) => {
               }
             }}
             key={key}
-            active={option.connector === connector}
-            color={option.color}
-            link={option.href}
-            header={option.name}
-            subheader={null} // use option.descriptio to bring back multi-line
+            title={option.name}
+            margin="0 0 15px 0"
             icon={option.iconURL}
           />
         )
@@ -184,12 +201,16 @@ const ConnectWalletModal = ({ isOpen, onDismiss }: Props) => {
 
   return (
     <Modal isOpen={isOpen} onDismiss={onDismiss} maxHeight={90}>
-      <UpperSection>
-        <HeaderRow>
-          <span>Connect to a wallet</span>
-        </HeaderRow>
+      <FlexContainer direction="column" margin="32px 24px 30px" width="100%">
+        <FlexContainer
+          alignItems="center"
+          justifyContent="center"
+          margin="0 0 16px 0"
+        >
+          <HeaderTitle>Connect to a Wallet</HeaderTitle>
+        </FlexContainer>
         {getOptions()}
-      </UpperSection>
+      </FlexContainer>
     </Modal>
   );
 };

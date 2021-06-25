@@ -20,8 +20,12 @@ const ConnectButton = ({ width }: ConnectButtonProps) => {
   }, []);
 
   return (
-    <Button variant="primary" onClick={connectHandler} width={width}>
-      {account && active ? truncate(account) : "Connect"}
+    <Button
+      variant="primary"
+      onClick={connectHandler}
+      width={width}
+      title={account && active ? truncate(account) : "Connect"}
+    >
       <ConnectWalletModal
         isOpen={showConnectWalletModal}
         onDismiss={() => setShowConnectWalletModal(false)}
