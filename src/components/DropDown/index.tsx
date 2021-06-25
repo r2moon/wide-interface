@@ -17,6 +17,7 @@ const StyledDropDownBox = styled.div<StyledDropDownBoxProps>`
   border-radius: ${({ opened }) => (opened ? "22px 22px 0 0" : "22px")};
   position: relative;
   cursor: pointer;
+  box-sizing: border-box;
 `;
 
 const StyledDropDownList = styled.div`
@@ -96,7 +97,7 @@ const StyledDropDownOption = styled.div`
   }
 `;
 
-const StyledTytle = styled.div`
+const StyledTitle = styled.div`
   cursor: pointer;
   padding: 8px 10px;
 `;
@@ -108,7 +109,7 @@ type DropDownProps = {
   onChange: (index: number) => void;
 };
 
-const DropDown = ({
+export default ({
   options,
   selected,
   placeholder,
@@ -119,9 +120,9 @@ const DropDown = ({
 
   return (
     <StyledDropDownBox ref={selectEl} opened={focused}>
-      <StyledTytle>
+      <StyledTitle>
         {selected !== undefined ? options[selected] : placeholder}
-      </StyledTytle>
+      </StyledTitle>
       {focused && (
         <StyledDropDownList>
           {options.map((option, i) => (
@@ -134,5 +135,3 @@ const DropDown = ({
     </StyledDropDownBox>
   );
 };
-
-export default DropDown;

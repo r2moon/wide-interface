@@ -17,11 +17,12 @@ const StyledButton = styled.button<ButtonProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 48px;
+  height: 44px;
   width: ${({ width }) => width};
-  border-radius: 24px;
+  border-radius: 22px;
   padding: 0 15px;
   font-size: 14px;
+  box-sizing: border-box;
   padding: ${({ padding }) => padding};
   margin: ${({ margin }) => margin};
 

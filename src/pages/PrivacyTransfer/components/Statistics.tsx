@@ -63,7 +63,7 @@ const Statistics = () => (
       </StyledText>
     </StyledGroup>
     <StyledLabel>Last deposits</StyledLabel>
-    <FlexContainer width="100%" margin="11px 0 0 0">
+    <FlexContainer width="100%">
       <FlexContainer width="50%" direction="column" margin="0 10px 0 0">
         {templates.map((template, i) => (
           <StyledStatisticsItem hasBorder={i % 2 === 0}>

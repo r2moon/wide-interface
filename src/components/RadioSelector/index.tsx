@@ -20,7 +20,8 @@ const StyledItem = styled.div<StyledItemProps>`
   width: 21px;
   height: 21px;
   border-radius: 50%;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
+  box-sizing: border-box;
 `;
 
 const StyledRadioItem = styled.div`

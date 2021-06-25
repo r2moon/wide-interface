@@ -8,3 +8,4 @@ export { default as DropDown } from "./DropDown";
 export { default as Button } from "./Button";
 export { default as RadioSelector } from "./RadioSelector";
 export { default as RoundRow } from "./RoundRow";
+export { default as Input } from "./Input";

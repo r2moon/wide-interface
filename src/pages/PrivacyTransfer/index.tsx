@@ -1,7 +1,8 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { FlexContainer, Button, RoundRow } from "components";
-import Deposit from "./components/Deposit";
+import PrivacyDeposit from "./components/Deposit";
+import PrivacyWithdraw from "./components/Withdraw";
 import Statistics from "./components/Statistics";
 
 const PrivacyDiv = styled.div`
@@ -68,7 +69,7 @@ const PrivacyTransfer = () => {
           </Button>
         </FlexContainer>
         <PrivacyDiv>
-          <Deposit />
+          {deposit ? <PrivacyDeposit /> : <PrivacyWithdraw />}
         </PrivacyDiv>
       </FlexContainer>
 
