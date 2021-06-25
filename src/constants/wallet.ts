@@ -1,6 +1,8 @@
 import { AbstractConnector } from "@web3-react/abstract-connector";
 import INJECTED_ICON_URL from "assets/images/arrow-right.svg";
 import METAMASK_ICON_URL from "assets/images/metamask.svg";
+import TRUSTWALLET_ICON_URL from "assets/images/trustwallet.svg";
+import WALLETCONNECT_ICON_URL from "assets/images/walletconnect.svg";
 import { injected } from "../connectors";
 
 export interface WalletInfo {
@@ -33,14 +35,14 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
   TRUSTWALLET: {
     connector: injected,
     name: "Trust Wallet",
-    iconURL: METAMASK_ICON_URL,
+    iconURL: TRUSTWALLET_ICON_URL,
     description: "Easy-to-use browser extension.",
     href: null,
   },
   WALLETCONNECT: {
     connector: injected,
     name: "Wallet Connect",
-    iconURL: METAMASK_ICON_URL,
+    iconURL: WALLETCONNECT_ICON_URL,
     description: "Easy-to-use browser extension.",
     href: null,
   },
