@@ -1,8 +1,8 @@
 import { AbstractConnector } from "@web3-react/abstract-connector";
-import INJECTED_ICON_URL from "assets/images/arrow-right.svg";
-import METAMASK_ICON_URL from "assets/images/metamask.svg";
-import TRUSTWALLET_ICON_URL from "assets/images/trustwallet.svg";
-import WALLETCONNECT_ICON_URL from "assets/images/walletconnect.svg";
+import INJECTED_ICON_URL from "assets/icons/arrow-right.svg";
+import METAMASK_ICON_URL from "assets/icons/metamask.svg";
+import TRUSTWALLET_ICON_URL from "assets/icons/trustwallet.svg";
+import WALLETCONNECT_ICON_URL from "assets/icons/walletconnect.svg";
 import { injected } from "../connectors";
 
 export interface WalletInfo {

@@ -8,11 +8,20 @@ import { Button, FlexContainer, Modal } from "components";
 import { injected } from "connectors";
 import { SUPPORTED_WALLETS } from "constants/wallet";
 import MetamaskIcon from "assets/images/metamask.png";
+import CloseIcon from "assets/icons/close.svg";
 import Option from "./Option";
 
 const HeaderTitle = styled.span`
   color: ${({ theme }) => theme.colors.primary};
   font-size: 24px;
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  right: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
 `;
 
 type Props = {
@@ -183,8 +192,12 @@ const ConnectWalletModal = ({ isOpen, onDismiss }: Props) => {
           alignItems="center"
           justifyContent="center"
           margin="0 0 16px 0"
+          position="relative"
         >
           <HeaderTitle>Connect to a Wallet</HeaderTitle>
+          <CloseButton onClick={onDismiss}>
+            <img src={CloseIcon} alt="close" />
+          </CloseButton>
         </FlexContainer>
         {getOptions()}
       </FlexContainer>
