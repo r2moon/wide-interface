@@ -23,7 +23,7 @@ const SUPPORTED_CHAIN_IDS = [137, 80001];
 
 export const network = new NetworkConnector({
   urls: NETWORK_URLS,
-  defaultChainId: 1,
+  defaultChainId: 80001,
 });
 
 let networkLibrary: Web3Provider | undefined;

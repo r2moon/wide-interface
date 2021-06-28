@@ -5,24 +5,12 @@ import { UnsupportedChainIdError, useWeb3React } from "@web3-react/core";
 import { AbstractConnector } from "@web3-react/abstract-connector";
 import { WalletConnectConnector } from "@web3-react/walletconnect-connector";
 import { Button, FlexContainer, Modal } from "components";
+import { HeaderTitle, CloseButton } from "components/Modal";
 import { injected } from "connectors";
 import { SUPPORTED_WALLETS } from "constants/wallet";
 import MetamaskIcon from "assets/images/metamask.png";
 import CloseIcon from "assets/icons/close.svg";
 import Option from "./Option";
-
-const HeaderTitle = styled.span`
-  color: ${({ theme }) => theme.colors.primary};
-  font-size: 24px;
-`;
-
-const CloseButton = styled.button`
-  position: absolute;
-  right: 0;
-  padding: 0;
-  background: transparent;
-  border: 0;
-`;
 
 type Props = {
   isOpen: boolean;

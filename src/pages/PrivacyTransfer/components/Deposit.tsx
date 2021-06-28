@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 import { UnsupportedChainIdError, useWeb3React } from "@web3-react/core";
 import styled from "styled-components";
 import {
@@ -8,6 +8,13 @@ import {
   ConnectButton,
   Button,
 } from "components";
+import {
+  privacyTransferContracts,
+  PrivacyTransferContract,
+} from "constants/contracts/privacy";
+import { Currency } from "types";
+import { network } from "connectors";
+import { getUniqueArray } from "utils/array";
 import PrivacyNotesModal from "./PrivacyNotesModal";
 
 const StyledLabel = styled.div`
@@ -22,14 +29,48 @@ const StyledGroup = styled.div`
 `;
 
 export default () => {
-  const { active, account } = useWeb3React();
+  const { active, account, chainId } = useWeb3React();
 
-  const [tokenSelected, setTokenSelected] = useState<number>(0);
+  const [currencySelected, setCurrencySelected] = useState<number>(0);
   const [amountSelected, setAmountSelected] = useState<number>(0);
-  const tokens = ["ETH", "DAI", "USDC"];
-  const amounts = ["0.1 ETH", "1 ETH", "10 ETH", "100 ETH"];
+
+  const currencies = useMemo(
+    () =>
+      getUniqueArray(
+        privacyTransferContracts.filter(
+          (item) => item.network === (chainId ?? network.currentChainId)
+        ),
+        (a: PrivacyTransferContract, b: PrivacyTransferContract) =>
+          a.currency.symbol === b.currency.symbol
+      ).map((item: PrivacyTransferContract) => item.currency),
+    [chainId]
+  );
+
+  const amounts = useMemo(
+    () =>
+      privacyTransferContracts
+        .filter(
+          (item) =>
+            item.network === (chainId ?? network.currentChainId) &&
+            item.currency.symbol === currencies[currencySelected].symbol
+        )
+        .map((item) => item.amount),
+    [chainId, currencies, currencySelected]
+  );
 
   const [privacyNotesOpend, setPrivacyNotesOpend] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (currencySelected >= currencies.length) {
+      setCurrencySelected(0);
+    }
+  }, [currencySelected, currencies]);
+
+  useEffect(() => {
+    if (amountSelected >= amounts.length) {
+      setAmountSelected(0);
+    }
+  }, [amountSelected, amounts]);
 
   const deposit = useCallback(() => {
     setPrivacyNotesOpend(true);
@@ -42,18 +83,20 @@ export default () => {
       margin="45px 65px"
     >
       <StyledGroup>
-        <StyledLabel>Token</StyledLabel>
+        <StyledLabel>Currency</StyledLabel>
         <DropDown
-          options={tokens}
+          options={currencies.map((currency) => currency.symbol)}
           placeholder="Select a token"
-          selected={tokenSelected}
-          onChange={setTokenSelected}
+          selected={currencySelected}
+          onChange={setCurrencySelected}
         />
       </StyledGroup>
       <StyledGroup>
         <StyledLabel>Amount</StyledLabel>
         <RadioSelector
-          options={amounts}
+          options={amounts.map(
+            (item) => `${item} ${currencies[currencySelected].symbol}`
+          )}
           selected={amountSelected}
           onChange={setAmountSelected}
         />

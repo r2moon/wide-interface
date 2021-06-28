@@ -142,3 +142,16 @@ export default function Modal({
     </>
   );
 }
+
+export const HeaderTitle = styled.span`
+  color: ${({ theme }) => theme.colors.primary};
+  font-size: 24px;
+`;
+
+export const CloseButton = styled.button`
+  position: absolute;
+  right: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+`;

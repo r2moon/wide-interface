@@ -1,13 +1,7 @@
 import { useState, useCallback } from "react";
 import { UnsupportedChainIdError, useWeb3React } from "@web3-react/core";
 import styled from "styled-components";
-import {
-  FlexContainer,
-  Input,
-  RadioSelector,
-  ConnectButton,
-  Button,
-} from "components";
+import { FlexContainer, Input, ConnectButton, Button } from "components";
 import PrivacyNotesModal from "./PrivacyNotesModal";
 
 const StyledLabel = styled.div`

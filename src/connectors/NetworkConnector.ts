@@ -182,7 +182,7 @@ export class MiniRpcProvider implements AsyncSendable {
 export class NetworkConnector extends AbstractConnector {
   private readonly providers: { [chainId: number]: MiniRpcProvider };
 
-  private currentChainId: number;
+  public currentChainId: number;
 
   constructor({ urls, defaultChainId }: NetworkConnectorArguments) {
     invariant(

@@ -29,7 +29,13 @@ const StyledStatisticsItem = styled.div<StyledStatisticsItemProps>`
   border: 1px solid;
   border-color: ${({ theme, hasBorder }) =>
     hasBorder ? theme.colors.primary : "transparent"};
+  background-color: ${({ hasBorder }) => (hasBorder ? "#fff" : "transparent")};
   padding-left: 10px;
+  color: ${({ theme }) => theme.colors.primary};
+`;
+
+const StyledItemId = styled.div`
+  color: ${({ theme }) => theme.colors.link};
 `;
 
 const templates = [
@@ -67,6 +73,7 @@ const Statistics = () => (
       <FlexContainer width="50%" direction="column" margin="0 10px 0 0">
         {templates.map((template, i) => (
           <StyledStatisticsItem hasBorder={i % 2 === 0}>
+            <StyledItemId>{template.id}.&nbsp;</StyledItemId>
             <div>{template.label}</div>
           </StyledStatisticsItem>
         ))}
@@ -74,6 +81,7 @@ const Statistics = () => (
       <FlexContainer width="50%" direction="column" margin="0 0 0 10px">
         {templates.map((template, i) => (
           <StyledStatisticsItem hasBorder={i % 2 === 0}>
+            <StyledItemId>{template.id}.&nbsp;</StyledItemId>
             <div>{template.label}</div>
           </StyledStatisticsItem>
         ))}

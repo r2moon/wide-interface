@@ -50,8 +50,8 @@ const StyledIconContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 48px;
-  width: 48px;
+  height: 44px;
+  width: 44px;
   border-radius: 50%;
   border: 2px solid ${({ theme }) => theme.colors.border};
   box-sizing: border-box;

@@ -1,53 +1,42 @@
 import { useCallback, useState } from "react";
 import styled from "styled-components";
-import { isMobile } from "react-device-detect";
-import { Modal } from "components";
-
-const UpperSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin: 20px;
-
-  h5 {
-    margin: 0;
-    margin-bottom: 0.5rem;
-    font-size: 1rem;
-    font-weight: 400;
-  }
-
-  h5:last-child {
-    margin-bottom: 0px;
-  }
-
-  h4 {
-    margin-top: 0;
-    font-weight: 500;
-  }
-`;
-
-const HeaderRow = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-`;
+import { Button, FlexContainer, Modal } from "components";
+import { HeaderTitle, CloseButton } from "components/Modal";
+import CloseIcon from "assets/icons/close.svg";
 
 type Props = {
   isOpen: boolean;
   onDismiss: () => void;
 };
 
-const PrivacyNotesModal = ({ isOpen, onDismiss }: Props) => {
-  const [notes, setNotes] = useState("22");
-  return (
-    <Modal isOpen={isOpen} onDismiss={onDismiss} maxHeight={90}>
-      <UpperSection>
-        <HeaderRow>
-          <span>Your privacy note</span>
-        </HeaderRow>
-      </UpperSection>
-    </Modal>
-  );
-};
-
-export default PrivacyNotesModal;
+export default ({ isOpen, onDismiss }: Props) => (
+  <Modal isOpen={isOpen} onDismiss={onDismiss} maxHeight={90}>
+    <FlexContainer direction="column" margin="32px 24px 30px" width="100%">
+      <FlexContainer
+        alignItems="center"
+        justifyContent="center"
+        margin="0 0 16px 0"
+        position="relative"
+      >
+        <HeaderTitle>Your Private Note</HeaderTitle>
+        <CloseButton onClick={onDismiss}>
+          <img src={CloseIcon} alt="close" />
+        </CloseButton>
+      </FlexContainer>
+      <FlexContainer
+        alignItems="center"
+        justifyContent="center"
+        direction="column"
+        margin="0 0 16px 0"
+      >
+        <span>
+          Please backup your note. You will need it later to withdraw your
+          deposit back.
+          <br />
+          Treat your note as a private key - <b>never share</b> it with anyone,
+          including wide.finance developers.
+        </span>
+      </FlexContainer>
+    </FlexContainer>
+  </Modal>
+);
