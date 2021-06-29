@@ -15,6 +15,7 @@ import {
 import { Currency } from "types";
 import { network } from "connectors";
 import { getUniqueArray } from "utils/array";
+import PrivacyTransfer from "contracts/privacyTransfer";
 import PrivacyNotesModal from "./PrivacyNotesModal";
 
 const StyledLabel = styled.div`
@@ -29,10 +30,16 @@ const StyledGroup = styled.div`
 `;
 
 export default () => {
-  const { active, account, chainId } = useWeb3React();
+  const { active, account, chainId, library } = useWeb3React();
 
   const [currencySelected, setCurrencySelected] = useState<number>(0);
   const [amountSelected, setAmountSelected] = useState<number>(0);
+
+  const [privacyTransfer, setPrivacyTransfer] = useState<
+    PrivacyTransfer | undefined
+  >();
+
+  const [privateNote, setPrivateNote] = useState();
 
   const currencies = useMemo(
     () =>
@@ -72,9 +79,33 @@ export default () => {
     }
   }, [amountSelected, amounts]);
 
-  const deposit = useCallback(() => {
+  const generatePrivateNote = useCallback(() => {
+    if (chainId && library && account) {
+      const signer = library.getSigner(account).connectUnchecked();
+      const _privacyTransfer = new PrivacyTransfer(
+        currencies[currencySelected],
+        amounts[amountSelected],
+        chainId,
+        signer
+      );
+      setPrivacyTransfer(_privacyTransfer);
+      const _privateNote = _privacyTransfer.generatePrivateNote(
+        currencies[currencySelected],
+        amounts[amountSelected],
+        chainId
+      );
+      setPrivateNote(_privateNote);
+    }
     setPrivacyNotesOpend(true);
-  }, []);
+  }, [currencies, currencySelected, amounts, amountSelected, chainId]);
+
+  const depositHandler = useCallback(() => {
+    if (privacyTransfer && privateNote) {
+      privacyTransfer.deposit(privateNote);
+      setPrivateNote(undefined);
+    }
+    setPrivacyNotesOpend(false);
+  }, [privateNote, privacyTransfer]);
 
   return (
     <FlexContainer
@@ -103,13 +134,15 @@ export default () => {
       </StyledGroup>
       {(!account || !active) && <ConnectButton width="100%" />}
       {account && active && (
-        <Button variant="primary" width="100%" onClick={deposit}>
+        <Button variant="primary" width="100%" onClick={generatePrivateNote}>
           DEPOSIT
         </Button>
       )}
       <PrivacyNotesModal
-        isOpen={privacyNotesOpend}
+        isOpen={privacyNotesOpend && !!privacyTransfer && !!privateNote}
+        privateNote={privateNote}
         onDismiss={() => setPrivacyNotesOpend(false)}
+        onDeposit={depositHandler}
       />
     </FlexContainer>
   );

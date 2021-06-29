@@ -1,3 +1,4 @@
+/* eslint-disable radix */
 import { Web3Provider } from "@ethersproject/providers";
 
 export default function getLibrary(provider: any): Web3Provider {
@@ -6,7 +7,7 @@ export default function getLibrary(provider: any): Web3Provider {
     typeof provider.chainId === "number"
       ? provider.chainId
       : typeof provider.chainId === "string"
-      ? parseInt(provider.chainId, 10)
+      ? parseInt(provider.chainId)
       : "any"
   );
   library.pollingInterval = 15000;

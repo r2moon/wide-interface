@@ -49,10 +49,10 @@ export default () => {
           WITHDRAW
         </Button>
       )}
-      <PrivacyNotesModal
+      {/* <PrivacyNotesModal
         isOpen={privacyNotesOpend}
         onDismiss={() => setPrivacyNotesOpend(false)}
-      />
+      /> */}
     </FlexContainer>
   );
 };
